@@ -346,7 +346,7 @@ defmodule Paginator do
       |> exclude(:preload)
       |> exclude(:select)
       |> exclude(:order_by)
-      |> select([e], struct(e, [total_count_primary_key_field]))
+      |> select([e], map(e, [total_count_primary_key_field]))
       |> subquery
       |> select(count("*"))
       |> repo.one(repo_opts)
@@ -369,7 +369,7 @@ defmodule Paginator do
       |> exclude(:select)
       |> exclude(:order_by)
       |> limit(^(total_count_limit + 1))
-      |> select([e], struct(e, [total_count_primary_key_field]))
+      |> select([e], map(e, [total_count_primary_key_field]))
       |> subquery
       |> select(count("*"))
       |> repo.one(repo_opts)
